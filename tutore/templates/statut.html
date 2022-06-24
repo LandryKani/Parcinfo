@@ -1,0 +1,57 @@
+{% extends 'base2.html' %}
+
+
+{% block contentst %}
+<br>
+
+	<div class="col-md-5" style="width:100%; margin-top:10px;">
+		<div class="card card-body">
+			<h5>Liste de defaillance </h5>
+			<hr>
+			<br>
+			{% if request.user.is_staff %}
+			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'ajouterST' %}"> Signaler Nouveau Probleme </a>
+			{% endif %}
+			<br>
+			<br>
+		</div>
+	</div>
+
+	<div class="col-md-3" style="width:100%; margin-top:10px;">
+		<div class="card card-body">
+			<h5>Informations</h5>
+			<hr>
+			<p> <h2 style="color:#1ab394;"><span class="text-navy"><i class="fa fa-play fa-rotate-270"></i></span> <span class="text-danger"><i class="fa fa-play fa-rotate-90"></i></span> {{count}}   </h2></p>
+		</div>
+	</div>
+
+	<div class="col-md-3" style="width:100%; margin-top:10px;">
+		<div class="card card-body">
+			<h5> Bilan </h5>
+			<hr>
+			<h2  class="font font-bold" style="text-align: center; padding:10px">... {{count}} Statuts ...</h2>
+			<br>
+		</div>
+	</div>
+
+{% for i in statut %}
+
+	<div class="col-md-4" style="width:100%; margin-top:10px;">
+		<div class="card card-body">
+			<span>
+				<h4> {{ i.equipement.nom }} </h4>
+				{% if request.user.is_staff %}
+			 	<small class="float-right"><a class=" btn btn-danger" href="{% url 'supprimerST' i.id %}" style=" margin-left:0px;"> Supprimer </a></small>
+				<small class="float-right"><a class=" btn btn-warning" href="{% url 'modifierST' i.id %}" style=" margin-left:0px;"> Modifier </a></small>
+				{% endif  %}
+				<hr>
+			</span>
+			<h5 style="text-align: center; padding:9px"> {{i.panne}}</h5>
+			<h5 style="text-align: center; padding:9px"> {{i.etatp}}</h5>
+			<h5 style="text-align: center; padding:9px"> {{i.datesg}}</h5>
+		</div>
+	</div>
+
+	{% endfor %}
+
+{% endblock %}

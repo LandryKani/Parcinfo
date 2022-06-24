@@ -1,0 +1,89 @@
+{% extends 'base2.html' %}
+
+{% block contentaNO %}
+
+<!--br>
+
+
+<div class="row" style="background:white; margin:10px; margin-left:5px;">
+    .
+    <br>
+    <a class="btn btn-sm btn-primary" href="{% url 'ajouterNO' %}"><h5> REDIGER UNE NOTIFICATION  </h5></a>
+    .
+</div>
+<br>
+{% for i in liste_nom %}
+    <div class="col-md-12" style=" margin-top:5px; padding-left:15px;">
+        <div class="card card-body">
+
+            <div class="">
+            {% for j in notification %}
+                {% if i == j.expediteur %}
+                <a href="{% url 'detail_notification' j.id %}" style=" margin:0px; margin-left:25px; padding:0px;"> {{j.date}}</a> <small><a class="float-left btn btn-primary" style="margin-left:10px; margin-right:20px;"> {{i.statut}}</a></small>
+            </div>
+        </div>
+    </div>
+        {% endif %}
+	{% endfor %}
+{% endfor %}
+
+<br-->
+<div class="wrapper wrapper-content col-md-12">
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="ibox ">
+                <div class="ibox-content mailbox-content">
+                    <div class="file-manager">
+                        <a class="btn btn-block btn-primary compose-mail" href="{% url 'ajouterNO' %}"><i class="fa fa-paper-plane-o" style="margin-left:1.em">.</i>Compose Mail</a>
+                        <div class="space-25"></div>
+                        <h5>Folders</h5>
+                        <ul class="folder-list m-b-md" style="padding: 0">
+                            <li><a href="{% url 'listeNO' %}"> <i class="fa fa-inbox "></i> Inbox </a></li>
+                            <li><a href="{% url 'listeNOenvoye' %}"> <i class="fa fa-envelope-o"></i> Message Envoye  <span
+                                    class="label label-warning float-right">{{nb}}</span></a></li>
+                            <!--li><a href=" "> <i class="fa fa-file-text-o"></i> Drafts <span class="label label-danger float-right">2</span></a></li>
+                            <li><a href=" "> <i class="fa fa-trash-o"></i> Trash</a></li-->
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 animated fadeInRight">
+            <div class="mail-box-header">
+                <h2>
+                    Message envoyer ({{nb}})
+                </h2>
+                <div class="mail-tools tooltip-demo m-t-md">
+                    <div class="btn-group float-right">
+                        <button class="btn btn-white btn-sm"><i class="fa fa-arrow-left"></i></button>
+                        <button class="btn btn-white btn-sm"><i class="fa fa-arrow-right"></i></button>
+
+                    </div>
+                    <a href="{% url 'listeNO' %}" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="left"
+                            title="Refresh inbox"><i class="fa fa-refresh"></i> Refresh
+                    </a>
+                </div>
+            </div>
+            <div class="mail-box col-md-8">
+
+                <table class="table table-hover table-mail ">
+                    <tbody>
+                    {% for i in notification %}
+                    <tr class="unread">
+                        <td class="mail-ontact"><a href="{% url 'detail_notification' i.id %}">{{i.destinataire}}</a></td>
+                        <td class="mail-subject"><a href="{% url 'detail_notification' i.id %}">{% if i.statut == 'unread' %}<i class="fa fa-warning"></i>{% else %} <i class="fa fa-check-square-o"></i> {% endif %}{{i.statut}}</a></td>
+                        <td class="text-right mail-date"> Envoyer le:<t></t>{{i.date}}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+

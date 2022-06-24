@@ -1,0 +1,57 @@
+{% extends 'base2.html' %}
+
+
+{% block contentst %}
+<br>
+
+	<div class="col-md-5" style="width:100%; margin-top:10px;">
+		<div class="card card-body">
+			<h5>Statut Categorie:</h5>
+			<hr>
+			<br>
+			{% if request.user.is_staff %}
+			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'ajouterCA' %}"> Creer nouvel Categorie </a>
+			{% endif %}
+			<br>
+			<br>
+		</div>
+	</div>
+
+	<div class="col-md-3" style="width:100%; margin-top:10px;">
+		<div class="card card-body">
+			<h5>Informations</h5>
+			<hr>
+			<p> <h2 style="color:#1ab394;"><span class="text-navy"><i class="fa fa-play fa-rotate-270"></i></span> <span class="text-danger"><i class="fa fa-play fa-rotate-90"></i></span> {{count}}   </h2></p>
+		</div>
+	</div>
+
+	<div class="col-md-4" style="width:100%; margin-top:10px;">
+		<div class="card card-body">
+			<h5> Categorie Existante</h5>
+			<hr>
+			<h2 class="font font-bold" style="text-align: center; padding:10px">... {{count}} categorie(s) ...</h2>
+			<br>
+		</div>
+	</div>
+
+	{% for i in categorie %}
+
+	<div class="card col-md-4" style="width:100%; margin-top:10px;">
+		<div class="card card-body">
+			<span>
+				<h4> {{i.codec}} - {{ i.nomc }}</h4>
+			{% if request.user.is_staff %}
+				<small class="float-right"><a class=" btn btn-danger" href="{% url 'supprimerCA' i.id %}" style=" margin-left:0px;"> Supprimer </a></small>
+				<small class="float-right"><a class=" btn btn-warning" href="{% url 'modifierCA' i.id %}" style=" margin-left:0px;"> Modifier </a></small>
+			{% endif %}
+				<hr>
+				<h3 class ="float-left" style="text-align: center; padding:0px; margin-left:25px;"> {{i.quantite}}</h3>
+			</span>
+		</div>
+	</div>
+
+	{% endfor %}
+
+
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base2.html' %}
+
+
+{% block contente %}
+<br>
+
+	<div class="col-md-5" style="width:100%; margin-top:10px;">
+		<div class="card card-body">
+			<h5>Liste Equipement </h5>
+			<hr>
+			<br>
+			{% if request.user.is_staff %}
+			<a class="btn btn-outline-info  btn-sm btn-block" href="{% url 'ajouterE' %}"> Creer Equipement </a>
+			{% endif %}
+			<br>
+			<br>
+		</div>
+	</div>
+
+	<div class="col-md-3" style="width:100%; margin-top:10px;">
+		<div class="card card-body">
+			<h5>Informations</h5>
+			<hr>
+			<p> <h2 style="color:#1ab394;"><span class="text-navy"><i class="fa fa-play fa-rotate-270"></i></span> <span class="text-danger"><i class="fa fa-play fa-rotate-90"></i></span> {{count}}   </h2></p>
+		</div>
+	</div>
+
+	<div class="col-md-4" style="width:100%; margin-top:10px;">
+		<div class="card card-body">
+			<h5>Nombre Equipements</h5>
+			<hr>
+			<h2 class="font font-bold" style="text-align: center; padding:9px">... {{count}} Equipement(s) ...</h2>
+			<br>
+		</div>
+	</div>
+	{% for i in equipement %}
+
+	<div class="col-md-3" style="width:100%; margin-top:10px;">
+		<div class="card card-body">
+			<div>
+			<span>
+				<h4> {{ i.nom }} </h4>
+				<h6>
+
+			{% if request.user.is_staff %}
+			 		<small class="float-right"><a class=" btn btn-danger" href="{% url 'supprimerE' i.id %}" style=" margin-left:0px;"> Supprimer </a></small>
+					<small class="float-right"><a class=" btn btn-warning" href="{% url 'modifierE' i.id %}" style=" margin-left:0px;"> Modifier </a></small>
+			{% endif %}
+					<hr>
+				</h6>
+			</span>
+			</div>
+			<h5 style="text-align: center; padding:9px"> {{i.code}}</h5>
+			<h5 style="text-align: center; padding:9px"> {{i.nom}}</h5>
+			<h5 style="text-align: center; padding:9px"> {{i.etat}}</h5>
+			<h5 style="text-align: center; padding:9px"> {{i.dateentrer}}</h5>
+			<h5 style="text-align: center; padding:9px"> {{i.datemodif}}</h5>
+			<h5 style="text-align: center; padding:9px"> {{i.image}}</h5>
+			<br>
+		</div>
+	</div>
+
+	{% endfor %}
+
+
+
+{% endblock %}

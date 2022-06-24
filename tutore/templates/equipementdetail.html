@@ -1,0 +1,121 @@
+{% extends 'base2.html' %}
+
+
+{% block contentf %}
+<br>
+<div class="row">
+
+        <div class="col-md-4">
+            <div class="card card-body">
+                <h5>Nombre Panne</h5>
+                <hr>
+                <h2 style="text-align: center; padding:10px">... ...</h2>
+            </div>
+        </div>
+
+    <br>
+    <div class="col-md-4">
+        <div class="col-xs-12 text-center">
+            <h2>Donut Chart</h2>
+        </div>
+        <div id="donut-chart"></div>
+        <script>
+      	var chart = bb.generate({
+     	   data: {
+     	     columns: [
+     	       ["Blue", 2],
+     	       ["orange", 4],
+    	        ["green", 3],
+   		       ],
+   	       type: "donut",
+   	       onclick: function (d, i) {
+            console.log("onclick", d, i);
+  	        },
+   	       onover: function (d, i) {
+  	          console.log("onover", d, i);
+    	      },
+  	       onout: function (d, i) {
+            console.log("onout", d, i);
+       	   },
+   	    },
+        donut: {
+          title: "70",
+        },
+        bindto: "#donut-chart",
+      	});
+
+        </script>
+    </div>
+    <div class="col-md-4">
+        <div class="col-xs-12 text-center">
+            <h2>Donut Chart</h2>
+        </div>
+        <div id="donut-chart2"></div>
+        <script>
+      	var chart = bb.generate({
+     	   data: {
+     	     columns: [
+     	       ["Blue", 2],
+     	       ["orange", 4],
+    	        ["green", 3],
+   		       ],
+   	       type: "donut",
+   	       onclick: function (d, i) {
+            console.log("onclick", d, i);
+  	        },
+   	       onover: function (d, i) {
+  	          console.log("onover", d, i);
+    	      },
+  	       onout: function (d, i) {
+            console.log("onout", d, i);
+       	   },
+   	    },
+        donut: {
+          title: "70",
+        },
+        bindto: "#donut-chart2",
+      	});
+
+        </script>
+    </div>
+</div>
+<br>
+<div class="row" style="background:white;">
+    .
+    <br>
+    <a class="btn btn-sm btn-danger" href="{% url 'ajoutstatut' %}"><h5> SIGNALER PANNE </h5></a>
+    .
+</div>
+<br>
+<div class="row">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-8">
+        <div class="card card-body" style="padding-top:15px; margin-top:15px;">
+
+            <table class="table table-sm">
+                <hr>
+                <tr>
+                    <th> ID</th>
+                    <th> Equipement</th>
+                    <th> Panne</th>
+                    <th> Signalement</th>
+                </tr>
+                {% for i in statut %}
+                <tr>
+                    <th><a href="{% url 'statut' i.id %}">{{i.id}}</a></th>
+                    <th>{{i.equipement.nom}}</th>
+                    <th>{{i.panne.codep}}</th>
+                    <th>{{i.datesg}}</th>
+                    <th><button class="btn btn-sm btn-success"><a class="btn btn-sm btn-success" href="{% url 'modifstatut' i.id %}"> Modifier </a></button></th>
+
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

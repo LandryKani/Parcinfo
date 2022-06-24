@@ -1,0 +1,197 @@
+{% extends 'base2.html' %}
+{% load static %}
+
+{% block contente %}
+<div class="row" style="background:none;">
+
+
+    <div class="col-md-16">
+        <div class="card card-body" style="padding-top:15px; margin-top:15px;">
+            <a class="btn btn-outline-secondary" href="{% url 'ajoutstatut' %}"><h5> SIGNALER PANNE </h5></a>
+            <table class="table table-sm">
+                <hr>
+                <tr>
+                    <th> ID</th>
+                    <th> Equipement</th>
+                    <th> Panne</th>
+                    <th> Signalement</th>
+                </tr>
+                {% for i in statut %}
+                <tr>
+                    <th><a href="{% url 'statut' i.id %}">{{i.id}}</a></th>
+                    <th>{{i.equipement.nom}}</th>
+                    <th>{{i.panne.codep}}</th>
+                    <th>{{i.datesg}}</th>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
+            <a class="btn btn-outline-secondary" href="{% url 'ajoutcat' %}"><h5> INSERER NOUVELLE CATEGORIE </h5>
+            </a>
+            <table class="table table-sm">
+                <hr>
+                <tr>
+                    <th>ID</th>
+                    <th>NOM</th>
+                    <th>CODE</th>
+                    <th>QUANTITE</th>
+                    <th>MODIFIER</th>
+                    <th>SUPPRIMER</th>
+                </tr>
+
+                {% for i in categorie %}
+
+                <tr>
+                    <th><a href="{% url 'categorie' i.id %}">{{i.id}}</a></th>
+                    <th>{{i.nomc}}</th>
+                    <th><a href="">{{i.codec}}</a></th>
+                    <th>{{i.quantite}}</th>
+                    <th>
+                        <button class="btn btn-sm btn-success"><a class="btn btn-sm btn-success"
+                                                                  href="{% url 'modifcat' i.id %}"
+                                                                  style="font:white;"> Modifier </a></button>
+                    </th>
+                    <th>
+                        <button class="btn btn-sm btn-danger"><a class="btn btn-sm btn-danger" href="">
+                            Supprimer </a></button>
+                    </th>
+                </tr>
+
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card card-body">
+            <a class="btn btn-outline-secondary" href="{% url 'ajoutpa' %}"><h5> INDIQUER NOUVEAU PROBLEME </h5></a>
+            <table class="table table-sm">
+                <hr>
+                <tr>
+                    <th> ID</th>
+                    <th> CODE</th>
+                    <th> NOM</th>
+                    <th> PRIORITE</th>
+                    <th> MODIFIER</th>
+                    <th> SUPPRIMER</th>
+                </tr>
+                {% for i in panne %}
+                <tr>
+                    <th><a href="{% url 'panne' i.id %}">{{i.id}}</a></th>
+                    <th>{{i.codep}}</th>
+                    <th>{{i.nomp}}</th>
+                    <th style="color:red;">{{i.priorite}}</th>
+                    <th>
+                        <button class="btn btn-sm btn-success"><a class="btn btn-sm btn-success"
+                                                                  href="{% url 'modifpa' i.id %}"> Modifier </a>
+                        </button>
+                    </th>
+                    <th>
+                        <button class="btn btn-sm btn-danger"><a class="btn btn-sm btn-danger"
+                                                                 href="{% url 'supprimer_panne' i.id %}">
+                            Supprimer </a></button>
+                    </th>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<div class="row">
+
+</div>
+<br>
+<div class="row">
+
+</div>
+{% endblock %}
+
+<div class="col-md-12">
+    <div class="card card-body">
+        <a class="btn btn-outline-secondary" href="{% url 'ajouteq' %}"><h5> AJOUTER EQUIPEMENT </h5></a>
+        <table class="table table-sm">
+            <hr>
+            <tr>
+                <th>ORDRE</th>
+                <th>CODE</th>
+                <th>NOM</th>
+                <th>CATEGORIE</th>
+                <th>DATE MODIFICATION</th>
+                <th>ETAT</th>
+                <th>MODIFIER</th>
+                <th>SUPPRIMER</th>
+            </tr>
+
+            {% for i in equipement %}
+
+            <tr>
+                <th><a href="{% url 'equipement' i.id %}">{{i.id}}</a></th>
+                <th>{{i.code}}</th>
+                <th><a href="">{{i.nom}}</a></th>
+                <th>{{i.categorie}}</th>
+                <th>{{i.datemodif}}</th>
+                <th>{{i.etat}}</th>
+                <th>
+                    <button class="btn btn-sm btn-success"><a class="btn btn-sm btn-success"
+                                                              href="{% url 'modifeq' i.id %}"> Modifier </a>
+                    </button>
+                </th>
+                <th>
+                    <button class="btn btn-sm btn-danger"><a class="btn btn-sm btn-danger"
+                                                             href="{% url 'supprimer_eq' i.id %}"> Supprimer </a>
+                    </button>
+                </th>
+            </tr>
+
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div class="col-xs-12 text-center">
+        <h2>Donut Chart</h2>
+    </div>
+    <div id="donut-chart"></div>
+    <script>
+      	var chart = bb.generate({
+     	   data: {
+     	     columns: [
+     	       ["Blue", 2],
+     	       ["orange", 4],
+    	        ["green", 3],
+   		       ],
+   	       type: "donut",
+   	       onclick: function (d, i) {
+            console.log("onclick", d, i);
+  	        },
+   	       onover: function (d, i) {
+  	          console.log("onover", d, i);
+    	      },
+  	       onout: function (d, i) {
+            console.log("onout", d, i);
+       	   },
+   	    },
+        donut: {
+          title: "70",
+        },
+        bindto: "#donut-chart",
+      	});
+
+
+
+
+    </script>
+</div>

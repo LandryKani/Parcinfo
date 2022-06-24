@@ -1,0 +1,61 @@
+{% extends 'base2.html' %}
+
+
+{% block contentop %}
+
+<div class="container">
+        <div class="row">
+            <div class="col-xl-8 offset-xl-2 py-5">
+                <form id="contact-form" action="{% url 'send_email' %}" role="form">
+                    {% csrf_token %}
+                    <div class="messages">
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                    <div class="controls">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="form_name">Nom *</label>
+                                    <input id="form_name" type="text" name="name" class="form-control"
+                                        placeholder="Entrez votre nom *" required="required"
+                                        data-error="Entrez un nom.">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="form_email">Email *</label>
+                                    <input id="form_email" type="email" name="email" class="form-control"
+                                        placeholder="Entrez votre adresse mail *" required="required"
+                                        data-error="Entrez un adresse valide.">
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="form_message">Message *</label>
+                                    <textarea id="form_message" name="message" class="form-control"
+                                        placeholder="Votre message ici *" rows="4" required="required"
+                                        data-error="Laissez un message."></textarea>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="submit" class="btn btn-success btn-send" value="Evoyer">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

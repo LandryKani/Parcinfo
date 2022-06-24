@@ -1,0 +1,85 @@
+{% extends 'base2.html' %}
+
+{% block contentaNO %}
+
+<br>
+<div class="wrapper wrapper-content col-md-12">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="ibox ">
+                    <div class="ibox-content mailbox-content">
+                        <div class="file-manager">
+                            <a class="btn btn-block btn-primary compose-mail " href="{% url 'ajouterNOuser' key %}"><i class=" fa fa-paper-plane-o"></i>.Compose Mail</a>
+                            <div class="space-25"></div>
+                        </div>
+                        <h5>Folders</h5>
+                        <ul class="folder-list m-b-md" style="padding: 0">
+                            <li><a href="{% url 'listeNO' %}"> <i class="fa fa-inbox "></i> Inbox <span
+                                    class="label label-warning float-right">{{nb}}</span> </a></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 animated fadeInRight">
+            <div class="mail-box-header">
+                <span class="row">
+                <h1>
+                    Information Du Message
+                </h1>
+                <h1 class="float-right"  style="margin-left:45px; font-size:5.0em">
+                    {% if sms.statut == 'unread' %}
+                    <i class="fa fa-warning"></i>
+                    {% else %}
+                    <i class="fa fa-check-square-o"></i>
+                    {% endif %}
+                    {{sms.statut}}
+                </h1>
+                </span>
+                <div class="mail-tools tooltip-demo m-t-md">
+
+
+                    <h2>
+                        <span class="font-normal">Subject: </span>Notification dans le parc
+                    </h2>
+                    <h5>
+                        <span class="float-right font-normal"> At:<t></t> {{sms.date}}</span>
+                    </h5>
+                    <h3>
+                        <span class="font-normal">From: </span>{{sms.expediteur}}
+                        <br>
+                        <span>
+                            {% for k in user %}
+                            Email: {{k.email}}
+                            {% endfor %}
+                        </span>
+                    </h3>
+                </div>
+            </div>
+                <div class="mail-box">
+
+
+                <div class="mail-body">
+                    <p>
+                        <h3>
+                            {{sms.text}}
+                        </h3>
+                    </p>
+                </div>
+                        {% if request.user.username  == sms.destinataire %}
+                        <div class="mail-body text-right tooltip-demo">
+                                <a href="{% url 'markasread' sms.id %}" title="" data-placement="top" data-toggle="tooltip" data-original-title="Trash" class="btn btn-sm btn-white"><i class="fa fa-check-square "></i> Mark as read </a>
+                        </div>
+                        <div class="clearfix"></div>
+                        {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
+
+{% endblock %}

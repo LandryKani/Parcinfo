@@ -1,0 +1,42 @@
+{% extends 'base2.html' %}
+
+{% block contentaNO %}
+<br>
+<br>
+<br>
+<form action="{% url 'ajouterNO' %}" method="POST">
+    {% csrf_token %}
+    <div class="row" xmlns="http://www.w3.org/1999/html">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-12" style="margin-left:75%; margin-top:15px">
+            <div class="tab-body" data-id="connexion">
+                <div class="card card-body">
+                    <button class="btn btn-sm btn-secondary"><h5> Envoyer une Notification </h5></button>
+                    <span style="color:red;">{{response}}</span>
+                    <table class="table table-sm">
+                        <tr>
+                            <div class="tab-body" data-id="connexion">
+                                <div class="form-group">
+                                    <hr>
+                                    {{response}}
+                                    <br>
+                                    <input class="form-control" id="destinateur" name="destinateur" placeholder="Send to : "
+                                          value="{{destinateur}}" required type="text">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="text" name="text" placeholder="Your text"
+                                           required type="textarea">
+                                </div>
+                                <hr>
+                                <input name="Envoyer" type="submit">
+                            </div>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

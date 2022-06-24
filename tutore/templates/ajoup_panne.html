@@ -1,0 +1,29 @@
+{% extends 'base2.html' %}
+
+{% block contentaPA %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="row" xmlns="http://www.w3.org/1999/html">
+    <div class="col-md-3">
+    </div>
+        <div class="col-md-12" style="margin-left:75%; margin-top:15px">
+            <div class="tab-body" data-id="connexion">
+            <div class="card card-body">
+                <button class="btn btn-sm btn-secondary"><h5> Nouvelle Panne </h5></button>
+                <table class="table table-sm">
+                    <tr>
+                    <div class="tab-body" data-id="connexion">
+                        <br>
+                        {{form}}
+                        <input type="submit" name="enregistrer">
+                        <hr>
+                    </div>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}

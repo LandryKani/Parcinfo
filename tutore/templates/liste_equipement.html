@@ -1,0 +1,40 @@
+{% extends 'base2.html' %}
+
+
+{% block contentf %}
+<br>
+<div class="row" style="background:white;">
+    .
+    <br>
+    <a class="btn btn-sm btn-dark" href="{% url 'ajouteq' %}"><h5> AJOUTER EQUIPEMENT  </h5></a>
+    .
+</div>
+<br>
+<div class="row">
+	{% for i in equipement %}
+    <div class="col-md-3" style=" margin-top:5px; padding-top 5px;">
+        <div class="card card-body">
+            <h4 style="text=align:center;">Image</h4>
+			{{i.image}}
+        </div>
+        <div class="card card-body">
+            <h5>Informations</h5>
+            <hr>
+            <p> {{i.code}}</p>
+			<p> {{i.nom}}</p>
+			<p> {{i.categorie}}</p>
+			<p> {{i.etat}}</p>
+			<p> {{i.dateentrer}}</p>
+            <div class="row">
+                <button class="btn btn-sm btn-success"><a class="btn btn-sm btn-success" href="{% url 'modifeq' i.id %}"> Modifier </a></button>
+                <br>
+                <a class="btn btn-outline-danger  btn-sm btn-block" href="{% url 'supprimer_eq' i.id %}"> Supprimer </a></button>
+
+            </div>
+        </div>
+    </div>
+	{% endfor %}
+
+</div>
+
+{% endblock %}
